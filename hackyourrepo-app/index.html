@@ -20,6 +20,27 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <header>
+      <h1>Hack your repo</h1>
+      <select id="repos">
+        <option  >choose your repo...</option>
+        <option id="SampleRepo1" value="0"></option>
+        <option id="AndAnotherOne" value="1"></option>
+        <option id="HYF-Is-The-Best" value="2"></option>
+      </select>
+    </header>
+    <section class="container">
+      <section id="reposotories">
+        <ul>
+          <li><strong>Name:</strong> <span id="name"></span> </li>
+          <li><strong>Description:</strong> <span id="description"></span></li><br>
+          <li><strong>Forks:</strong> <span id="forks"></span></li>
+          <li><strong>updated:</strong> <span id="updated"></span></li>
+        </ul>
+      </section>
+      <section id="contributors"> <p> there are no contributors yet</p></section>
+    </section>
+    <footer><p>Hack your repo</p></footer>
     <script src="./script.js"></script>
   </body>
 </html>
