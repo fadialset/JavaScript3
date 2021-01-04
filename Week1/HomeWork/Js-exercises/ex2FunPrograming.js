@@ -2,11 +2,16 @@ function funFacts(){
     const xhr =  new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.onload = ()=>{
+  xhr.onload = () => {
+    if (xhr.status != 200) {
+        console.log(`Error: ${xhr.response}`)
+    }
+    else{
         console.log(xhr.response);
         const img = document.createElement('img');
         img.src = xhr.response.img;
-        document.body.appendChild(img)
+      document.body.appendChild(img);
+      }
     }
     const url = "https://xkcd.now.sh/?comic=latest";
     xhr.open('GET',url);

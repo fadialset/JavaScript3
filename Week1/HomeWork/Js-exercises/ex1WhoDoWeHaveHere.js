@@ -1,28 +1,31 @@
-function randomFriend(){
+const url = "https://www.randomuser.me/api";
+function randomFriend() {
     const xhr =  new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.onload = ()=>{
-        const FriendData = xhr.response;
-        console.log(FriendData);
+  xhr.onload = () => {
+    if (xhr.status != 200) {
+        console.log(`Error : ${xhr.status}`)
+      }else{
+        const friendData = xhr.response;
+      console.log(friendData.info);
+      }
     }
-    const url = "https://www.randomuser.me/api";
     xhr.open('GET',url);
     xhr.send();
 }
 randomFriend();
 
 
-function randomFriend1(){
-const url = `https://www.randomuser.me/api`
+function randomFriendAxios(){
 
 axios.get(url)
   .then(function (response) {
-    console.log(response);
+    console.log(response.data.info);
   })
   .catch(function (error) {
     console.log(error);
   })
   
 }
-randomFriend1();
+randomFriendAxios();

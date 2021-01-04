@@ -39,10 +39,11 @@ const description = document.getElementById("description");
 const forks = document.getElementById("forks");
 const updateInfo = document.getElementById("updated");
 
-repos.onclick = () => {
-  repoName.innerText = placeholderRepos[repos.value].name;
-  description.innerText = placeholderRepos[repos.value].description;
-  forks.innerText = placeholderRepos[repos.value].forks;
-  updateInfo.innerText = placeholderRepos[repos.value].updated;
+repos.onchange = () => {
+  const selectedRepo = placeholderRepos[repos.value];
+  repoName.innerText = selectedRepo.name;
+  description.innerText = selectedRepo.description;
+  forks.innerText = selectedRepo.forks;
+  updateInfo.innerText = selectedRepo.updated;
 }
 /// in the console I am facing an syntax error that name is undefined but the function works and I dont know why 

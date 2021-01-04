@@ -2,7 +2,10 @@ function creatDogImg(){
     const xhr =  new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.onload = ()=>{
+  xhr.onload = () => {
+    if (xhr.status != 200) {
+      console.log(`Error : ${xhr.response}`)
+    }
         console.log(xhr.response);
         const imgUrl = xhr.response.message;
         const listItem =document.createElement('li');
