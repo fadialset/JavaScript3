@@ -1,3 +1,125 @@
 /* 
   Write here your CSS rules for HackYourRepo!
 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+header, footer {
+  background-color: #FF6F61;
+  display: flex;
+  justify-content: start;
+  padding: 1rem;
+}
+
+h1 {
+  margin-right: 2rem;
+  color: #fff;
+}
+
+select {
+  width: 15rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: auto;
+}
+
+p {
+  display: inline;
+  font-weight: 500;
+}
+
+#contributors, #reposotories {
+  flex-grow: 1;
+  margin: .5rem;
+  box-shadow: grey 1px 1px 1px 1px;
+  padding: 3rem;
+}
+
+.contributorsTitle {
+  padding: 1rem;
+  box-shadow: grey 1px 1px 1px 1px;
+  margin-bottom: 0.5rem;
+}
+
+.contributorsTitle h2 {
+  color: grey;
+  font-size: 1rem;
+}
+
+#contributorCard {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  box-shadow: grey 1px 1px 1px 1px;
+  width: 100%;
+}
+
+#contributorCard div {
+  margin-left: auto;
+  background: darkgrey;
+  color: white;
+  padding: 0.1rem 0.8rem;
+  border-radius: 5px;
+}
+
+#contributorCard a{
+  text-decoration: none;
+}.contributorImage {
+  width: 50px;
+  height: 50px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  margin: .3rem;
+  font-weight: bold;
+}
+
+footer p {
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  body {
+    width: 100%;
+  }
+  h1 {
+    width: calc(100vw - 190px);
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  .container {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    width: 90%;
+  }
+  .container {
+    flex-wrap: wrap;
+  }
+}
