@@ -71,6 +71,15 @@ fetch(url)
     }
     })
   })
+  .catch((error) => {
+    select.style.display = 'none';
+    contributors.style.display = 'none';
+    reposotories.style.display = 'none';
+    const errorMessage = document.createElement('div');
+    errorMessage.innerText = 'Network request failed';
+    errorMessage.id = 'errorMessage';
+    container.appendChild(errorMessage);
+  })
   
 };
 
@@ -105,6 +114,17 @@ function selectContributor(repositoryName) {
         contributors.appendChild(contributorCard);
         contributorCard.append(contributorImage,contributorName,contributions)
       })
+    })
+    .catch((error) => {
+        select.style.display = 'none';
+    contributors.style.display = 'none';
+    reposotories.style.display = 'none';
+
+
+    const errorMessage = document.createElement('div');
+    errorMessage.innerText = 'Network request failed';
+    errorMessage.id = 'errorMessage';
+    container.appendChild(errorMessage);
   })
 };
 
