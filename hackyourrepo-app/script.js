@@ -29,6 +29,8 @@ const repoDescription = document.createElement('p');
 const repoForks = document.createElement('p');
 const repoUpdated = document.createElement('p');
 
+
+
 //////////////     BODY ELEMENTS TEXT //////////
 repo.textContent = 'Repository :'
 description.textContent = 'Description :'
@@ -53,26 +55,26 @@ repo.appendChild(repoName);
 description.appendChild(repoDescription);
 forks.appendChild(repoForks);
 updated.appendChild(repoUpdated);
-select.appendChild(emptyOption)
+select.appendChild(emptyOption);
+
 
 ////////////////// FETCH API /////////////
 const url = `https://api.github.com/orgs/HackYourFuture/repos?per_page=100`;
+let contributorURL;
 function creatSelectOptions(url){
 fetch(url)
   .then(response => response.json())
   .then((data) => {
-    data.map((repo) => {
+
+    data.forEach((repo,index) => {
       const repoName = document.createElement('option');
       repoName.textContent = repo.name;
+
       select.appendChild(repoName);
-      
-    for (let i = 0; i <= select.length; i++){
-      repoName.value = i -1;
-    }
+      repoName.value = index;
     })
   })
   .catch((error) => {
-    select.style.display = 'none';
     contributors.style.display = 'none';
     reposotories.style.display = 'none';
     const errorMessage = document.createElement('div');
@@ -88,35 +90,38 @@ function selectRepo(selectNumber) {
   fetch(url)
     .then(response => response.json())
     .then((jsonData) => {
+      console.log(jsonData)
       repoName.innerText = jsonData[selectNumber].name;
       repoDescription.innerText = jsonData[selectNumber].description;
       repoForks.innerText = jsonData[selectNumber].forks;
       repoUpdated.innerText = jsonData[selectNumber].updated_at;
+      contributorURL = jsonData[selectNumber].contributors_url;
+      console.log(contributorURL)
+      selectContributor(contributorURL);
     })
 };
-function selectContributor(repositoryName) {
-  const contributorsUrl = `https://api.github.com/repos/HackYourFuture/${repositoryName}/contributors`;
+
+
+function selectContributor(contributorsUrl) {
   fetch(contributorsUrl)
     .then(response => response.json())
     .then((jsonData) => {
       jsonData.forEach((contributor) => {
         const contributorCard = document.createElement('div');
-        contributorCard.id = "contributorCard";
         const contributorImage = document.createElement('img');
+        const contributorName = document.createElement('a');
+        const contributions = document.createElement('div');
+        contributorCard.id = "contributorCard";
         contributorImage.src = contributor.avatar_url;
         contributorImage.className = 'contributorImage';
-        const contributorName = document.createElement('a');
         contributorName.innerText = contributor.login;
         contributorName.href = contributor.html_url;
-        const contributions = document.createElement('div');
         contributions.innerText = contributor.contributions;
-
         contributors.appendChild(contributorCard);
-        contributorCard.append(contributorImage,contributorName,contributions)
+        contributorCard.append(contributorImage, contributorName, contributions);
       })
     })
     .catch((error) => {
-        select.style.display = 'none';
     contributors.style.display = 'none';
     reposotories.style.display = 'none';
 
@@ -131,8 +136,7 @@ function selectContributor(repositoryName) {
 function main() {
   creatSelectOptions(url);
   select.addEventListener('change', (e) => {
-  selectRepo(e.target.value);
-  selectContributor(e.target[e.target.value].innerText)
+  selectRepo(e.target.value);   
 })
 };
 
