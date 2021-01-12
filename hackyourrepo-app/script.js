@@ -14,6 +14,7 @@ const select = document.createElement('select');
 const emptyOption = document.createElement('option');
 const container = document.createElement('div');
 const contributors = document.createElement('div');
+const contributorsCardsDiv = document.createElement('div');
 const reposotories = document.createElement('div');
 reposotories.id = 'reposotories';
 const contributorsTitle = document.createElement('div');
@@ -47,7 +48,7 @@ body.append(header, container, footer);
 header.append(headerHeading, select);
 footer.appendChild(footerHeading);
 container.append(reposotories, contributors);
-contributors.appendChild(contributorsTitle);
+contributors.append(contributorsTitle,contributorsCardsDiv);
 contributorsTitle.appendChild(contributorsHeading);
 reposotories.appendChild(list);
 list.append(repo, description, forks, updated);
@@ -65,7 +66,7 @@ function creatSelectOptions(url){
 fetch(url)
   .then(response => response.json())
   .then((data) => {
-
+    console.log(data)
     data.forEach((repo,index) => {
       const repoName = document.createElement('option');
       repoName.textContent = repo.name;
@@ -90,7 +91,6 @@ function selectRepo(selectNumber) {
   fetch(url)
     .then(response => response.json())
     .then((jsonData) => {
-      console.log(jsonData)
       repoName.innerText = jsonData[selectNumber].name;
       repoDescription.innerText = jsonData[selectNumber].description;
       repoForks.innerText = jsonData[selectNumber].forks;
@@ -103,6 +103,7 @@ function selectRepo(selectNumber) {
 
 
 function selectContributor(contributorsUrl) {
+  contributorsCardsDiv.innerHTML = '';
   fetch(contributorsUrl)
     .then(response => response.json())
     .then((jsonData) => {
@@ -117,7 +118,7 @@ function selectContributor(contributorsUrl) {
         contributorName.innerText = contributor.login;
         contributorName.href = contributor.html_url;
         contributions.innerText = contributor.contributions;
-        contributors.appendChild(contributorCard);
+        contributorsCardsDiv.appendChild(contributorCard);
         contributorCard.append(contributorImage, contributorName, contributions);
       })
     })
